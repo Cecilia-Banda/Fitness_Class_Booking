@@ -77,11 +77,16 @@ WSGI_APPLICATION = "fitness_booking.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'fitness_db',  # Change to your database name
+        'USER': 'your_db_user',  # Change to your PostgreSQL username
+        'PASSWORD': 'your_db_password',  # Change to your password
+        'HOST': 'localhost',  # Change if using a remote database
+        'PORT': '5432',  # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
