@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fitness_db',  # Change to your database name
-        'USER': 'your_db_user',  # Change to your PostgreSQL username
-        'PASSWORD': 'your_db_password',  # Change to your password
+        'USER': 'fitness_user',  # Change to your PostgreSQL username
+        'PASSWORD': '3004',  # Change to your password
         'HOST': 'localhost',  # Change if using a remote database
         'PORT': '5432',  # Default PostgreSQL port
     }
