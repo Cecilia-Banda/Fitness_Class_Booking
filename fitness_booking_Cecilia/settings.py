@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "fitness_booking_Cecilia",  # Main app
 # Custom apps
      "accounts",
      "bookings",
