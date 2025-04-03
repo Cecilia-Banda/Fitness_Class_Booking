@@ -1,47 +1,31 @@
-name: Django CI/CD
+# This is a GitHub Actions workflow file for deploying a Django application to an Ubuntu server using Ansible.
+name: Deploy Django Application
 
 on:
   push:
     branches:
-      - main  # Adjust if using a different deployment branch
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: 3.9
 
-      - name: Install dependencies
+      - name: Install Ansible
         run: |
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install ansible
 
-      - name: Run tests
+      - name: Run Ansible Playbook
         run: |
-          source venv/bin/activate
-          python manage.py test
-
-  deploy:
-    needs: build  # Runs only if 'build' job succeeds
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy using SSH
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /path/to/your/project
-            git pull origin main
-            source /path/to/your/venv/bin/activate
-            pip install -r requirements.txt
-            python manage.py migrate
-            sudo systemctl restart gunicorn
+          ansible-playbook deploy.yml -i inventory
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
